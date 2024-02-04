@@ -96,11 +96,19 @@ Invoke-WebRequest -Uri $serverUrl -OutFile "server.jar"
 Write-Host "Server jar downloaded successfully."
 
 # create start script
+$guiPrompt = Read-Host -Prompt "Do you want to run the server with GUI? (yes/NO)"
+if ($guiPrompt -ieq "yes") {
+    $nogui = ""
+}
+else {
+    $nogui = "nogui"
+}
 Write-Host "Creating start script..."
 $startbat = @"
 set JAVA_HOME=$javaInstallLocation
 set PATH=%JAVA_HOME%\bin;%PATH%
-java -Xmx1024M -Xms1024M -jar server.jar nogui
+java -Xmx1024M -Xms1024M -jar server.jar $nogui
+pause
 "@
 
 $startbat | Out-File -FilePath "start.bat" -Encoding default
