@@ -72,7 +72,7 @@ if ($null -eq $highestJavaVersion -or $highestJavaVersion.VersionMajor -lt $targ
     $installPrompt = Read-Host -Prompt "Required Java version is not satisfied (at least $targetJavaVersion). Do you want to install Java? (YES/no)"
     if ($installPrompt -ine "no") {
         Write-Host "Downloading Java..."
-        Invoke-WebRequest -Uri "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe" -OutFile "jdk.exe"
+        Start-Process -FilePath "curl" -ArgumentList "-# https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe -o jdk.exe" -NoNewWindow -Wait
         Write-Host "Installing Java..."
         Start-Process -FilePath "jdk.exe" -ArgumentList "/s" -Wait
         Write-Host "Java installation completed."
@@ -100,7 +100,7 @@ else {
 # download server jar
 Write-Host "Downloading server jar..."
 $serverUrl = $versionManifestJSON.downloads.server.url
-Invoke-WebRequest -Uri $serverUrl -OutFile "server.jar"
+Start-Process -FilePath "curl" -ArgumentList "-# $serverUrl -o server.jar" -NoNewWindow -Wait
 Write-Host "Server jar downloaded successfully."
 
 # create start script
