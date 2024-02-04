@@ -87,7 +87,6 @@ if ($null -eq $highestJavaVersion -or $highestJavaVersion.VersionMajor -lt $targ
     }
     else {
         Write-Host "Java version is not satisfied. Exiting..."
-        Pause
         exit
     }
 }
@@ -139,4 +138,3 @@ else {
 }
 
 Write-Host "Server installed! Run start.bat to start the server."
-Pause
