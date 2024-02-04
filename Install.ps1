@@ -67,7 +67,7 @@ if ($null -eq $highestJavaVersion -or $highestJavaVersion.VersionMajor -lt $targ
         Invoke-WebRequest -Uri "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe" -OutFile "jdk.exe" -ProgressPreference "Continue"
         Write-Host "Installing Java..."
         Start-Process -FilePath "jdk.exe" -ArgumentList "/s" -Wait
-        Write-Host "Java installed!"
+        Write-Host "Java installation completed."
 
         # clear jdk.exe
         Remove-Item -Path "jdk.exe"
@@ -93,7 +93,7 @@ else {
 Write-Host "Downloading server jar..."
 $serverUrl = $versionManifestJSON.downloads.server.url
 Invoke-WebRequest -Uri $serverUrl -OutFile "server.jar"
-Write-Host "Server jar downloaded!"
+Write-Host "Server jar downloaded successfully."
 
 # create start script
 Write-Host "Creating start script..."
