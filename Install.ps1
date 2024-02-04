@@ -114,6 +114,10 @@ pause
 $startbat | Out-File -FilePath "start.bat" -Encoding default
 
 # agree to eula
+# remove eula.txt if exists
+if (Test-Path "eula.txt") {
+    Remove-Item -Path "eula.txt"
+}
 # Run server once to generate eula.txt
 Write-Host "Initializing server..."
 .\start.bat > $null
