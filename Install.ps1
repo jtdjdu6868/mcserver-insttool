@@ -1,3 +1,5 @@
+Write-Host "Fetching Minecraft server versions..."
+
 $versionsUrl = "https://piston-meta.mojang.com/mc/game/version_manifest_v2.json"
 
 $versionsRes = Invoke-WebRequest -Uri $versionsUrl
@@ -59,7 +61,13 @@ function getJavaVersions {
 
 $javaVersions = getJavaVersions
 
-$highestJavaVersion = $javaVersions[0]
+if($javaVersions.Count -eq 0) {
+    $highestJavaVersion = $null
+}
+else {
+    $highestJavaVersion = $javaVersions[0]
+}
+
 if ($null -eq $highestJavaVersion -or $highestJavaVersion.VersionMajor -lt $targetJavaVersion) {
     $installPrompt = Read-Host -Prompt "Java version is not satisfied (at least $targetJavaVersion). Do you want to install Java? (YES/no)"
     if ($installPrompt -ine "no") {
