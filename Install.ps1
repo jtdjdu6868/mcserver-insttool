@@ -120,7 +120,7 @@ if (Test-Path "eula.txt") {
 }
 # Run server once to generate eula.txt
 Write-Host "Initializing server..."
-.\start.bat > $null
+Start-Process -FilePath "cmd" -ArgumentList "/C ""$($javaInstallLocation)bin\java.exe"" -Xmx1024M -Xms1024M -jar server.jar nogui > nul" -NoNewWindow -Wait
 $agreeEula = Read-Host -Prompt "Agree to eula? (https://aka.ms/MinecraftEULA) (yes/NO)"
 if ($agreeEula -ieq "yes") {
     (Get-Content eula.txt) -replace "eula=false", "eula=true" | Set-Content eula.txt
