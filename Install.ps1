@@ -69,7 +69,7 @@ else {
 }
 
 if ($null -eq $highestJavaVersion -or $highestJavaVersion.VersionMajor -lt $targetJavaVersion) {
-    $installPrompt = Read-Host -Prompt "Java version is not satisfied (at least $targetJavaVersion). Do you want to install Java? (YES/no)"
+    $installPrompt = Read-Host -Prompt "Required Java version is not satisfied (at least $targetJavaVersion). Do you want to install Java? (YES/no)"
     if ($installPrompt -ine "no") {
         Write-Host "Downloading Java..."
         Invoke-WebRequest -Uri "https://download.oracle.com/java/21/latest/jdk-21_windows-x64_bin.exe" -OutFile "jdk.exe"
